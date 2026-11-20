@@ -1,0 +1,24 @@
+{
+  "name": "foundation-model-zero-shot-vs-fine-tuned",
+  "test_period": {
+    "forecast_origin": "2011-10-04",
+    "target_start": "2011-10-05",
+    "target_end": "2011-11-01",
+    "context_days": 90,
+    "horizon_days": 28,
+    "frozen_cohort_source": "artifacts/train-validation-test-2011-11-01/test-forecasts.csv",
+    "expected_scored_products": 2693
+  },
+  "fine_tuning_data": {
+    "fit_targets_through": "2011-08-31",
+    "validation_targets_through": "2011-09-28",
+    "validation_checkpoint_sample_size": 256,
+    "validation_seed": 42,
+    "test_targets_available_to_fit_or_model_selection": false
+  },
+  "forecast_target": "daily gross recorded quantity",
+  "forecast_features": "univariate sales only",
+  "point_forecast": "model median where available; otherwise documented model point forecast",
+  "scoreable_test_products": 2693,
+  "note": "This intentionally reuses the previously reported test window at the user's request; it is a paired comparison, not a newly untouched final benchmark."
+}

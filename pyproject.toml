@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "retailmind-ai-forecasting"
+version = "0.1.0"
+description = "Leakage-aware retail demand forecasting and inventory research"
+requires-python = ">=3.11"
+dependencies = [
+    "openpyxl>=3.1,<4",
+    "lightgbm>=4.5,<5",
+    "holidays>=0.60,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "pandas>=2.2,<4", "matplotlib>=3.9,<4", "jupyter>=1,<2", "nbconvert>=7,<8", "plotly>=5,<7"]
+neural = [
+    "torch>=2.6,<3",
+]
+chronos = [
+    "chronos-forecasting>=2.3,<3",
+    "peft>=0.15,<1",
+]
+timesfm3 = [
+    "timesfm>=3,<4",
+]
+toto = [
+    "toto-models>=1,<2 ; python_full_version >= '3.12'",
+]
+tirex = [
+    "tirex-2>=0.5,<1",
+]
+timestral = [
+    "timestral",
+]
+retailmind-model = [
+    "torch>=2.6,<3",
+    "peft>=0.15,<1",
+    "timestral",
+]
+app = [
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.34,<1",
+]
+
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu128"
+
+[tool.uv.sources]
+timestral = { git = "https://github.com/mistralai/timestral.git" }
+
+[project.scripts]
+retailmind = "retailmind.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

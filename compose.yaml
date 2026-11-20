@@ -1,0 +1,65 @@
+name: retailmind
+
+services:
+  api:
+    image: retailmind-ai-forecasting:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["uvicorn", "retailmind.dashboard_api:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      RETAILMIND_ROOT: /app
+      RETAILMIND_AUDIT_DB: /app/artifacts/milestone5/audit.sqlite3
+      PYTHONPATH: /app/src
+      TIMESTRAL_DEVICE: ${TIMESTRAL_DEVICE:-auto}
+      TIMESTRAL_MAX_GPU_MIB: 2048
+      TIMESTRAL_MODEL_REVISION: 9874d252ab0aae16f7f7c999f98f98d6ad7d8365
+    gpus: all
+    ports:
+      - "127.0.0.1:${RETAILMIND_PORT:-8000}:8000"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+        read_only: true
+      - audit-state:/app/artifacts/milestone5
+      - monitoring-state:/app/artifacts/milestone6/monitoring
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "from urllib.request import urlopen; urlopen('http://127.0.0.1:8000/ready', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+  monitor:
+    image: retailmind-ai-forecasting:local
+    command: ["python", "scripts/ops/monitor_daily.py", "--interval-hours", "24"]
+    environment:
+      RETAILMIND_ROOT: /app
+      PYTHONPATH: /app/src
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+        read_only: true
+      - monitoring-state:/app/artifacts/milestone6/monitoring
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+volumes:
+  audit-state:
+  monitoring-state:

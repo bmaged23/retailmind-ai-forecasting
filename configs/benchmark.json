@@ -1,0 +1,43 @@
+{
+  "cohort_as_of": "2011-04-30",
+  "cohort_lookback_days": 90,
+  "minimum_sale_days": 14,
+  "maximum_products": 100,
+  "context_days": 90,
+  "horizon_days": 28,
+  "validation_cutoffs": [
+    "2011-05-31",
+    "2011-06-28"
+  ],
+  "calibration_cutoffs": [
+    "2011-07-26"
+  ],
+  "test_cutoffs": [
+    "2011-08-23",
+    "2011-09-20",
+    "2011-10-18"
+  ],
+  "cohort_policy": "as of cutoff, first recorded sale at least 90 days earlier, >=14 sale days in lookback, at least one sale in final 28 days; rank by gross units, break ties by stock code",
+  "lstm": {
+    "context_days": 90,
+    "hidden_units": 32,
+    "layers": 1,
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "max_epochs": 20,
+    "early_stopping_patience": 3,
+    "early_stopping_days": 28,
+    "dropout": 0,
+    "weight_decay": 0,
+    "seed": 42,
+    "device": "cpu",
+    "reason": "CPU until a strict GPU memory cap can be verified"
+  },
+  "intermittent_cohort": {
+    "minimum_sale_days": 3,
+    "maximum_sale_days": 13,
+    "maximum_products": 100,
+    "recent_sale_days": 28,
+    "selection": "rank by lookback units descending, ties by stock code; disjoint from active cohort"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "model": "timestral209m_lora",
+  "model_id": "mistralai/Timestral-209M",
+  "adapter_path": "artifacts/validation_comparison_2011-07-01_to_2011-07-28/models/timestral209m/lora",
+  "cohort_file": "artifacts/validation_comparison_2011-07-01_to_2011-07-28/cohort.json",
+  "source_data": "data/processed/daily_sales.csv",
+  "context_days": 90,
+  "horizon_days": 28,
+  "quantile_levels": [0.1, 0.5, 0.9],
+  "interval_coverage_target": 0.8,
+  "calibration": {
+    "forecast_origin": "2011-07-31",
+    "target_start": "2011-08-01",
+    "target_end": "2011-08-28"
+  },
+  "evaluation": {
+    "forecast_origin": "2011-11-11",
+    "target_start": "2011-11-12",
+    "target_end": "2011-12-09"
+  },
+  "resources": {
+    "gpu_allocator_cap_mib": null,
+    "gpu_watchdog_mib": 1900,
+    "inference_batch_size": 16
+  },
+  "limitations": [
+    "Calibration and later-period evaluation use the same frozen April-eligible product cohort.",
+    "The source ends on 2011-12-09, so this evaluation is not evidence of current retail performance.",
+    "Earlier exploratory work examined some dates and subsets in these periods; do not describe the later-period results as a pristine blind benchmark.",
+    "Cross-product conformal scores are pooled by forecast horizon; SKU and date dependence weakens classical exchangeability guarantees.",
+    "Observed sales can be censored by stockouts; missing transaction dates are treated as zero recorded sales."
+  ]
+}

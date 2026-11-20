@@ -1,0 +1,280 @@
+{
+  "model": "timestral209m_lora",
+  "method": "horizon-wise conformalized quantile regression with signed adjustment",
+  "nominal_interval_coverage": 0.8,
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "calibration_origin": "2011-07-31",
+  "calibration_period": [
+    "2011-08-01",
+    "2011-08-28"
+  ],
+  "products": 4366,
+  "rows": 122248,
+  "horizon_adjustments": {
+    "1": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "2": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "3": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "4": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "5": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "6": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "7": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "8": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "9": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "10": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "11": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "12": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "13": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "14": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "15": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "16": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "17": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "18": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "19": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "20": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "21": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "22": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "23": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "24": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "25": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "26": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "27": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    },
+    "28": {
+      "calibration_products": 4366,
+      "finite_sample_rank_1_based": 3494,
+      "adjustment_units": 0.0
+    }
+  },
+  "calibration_coverage_raw_by_horizon": {
+    "1": 0.9383875400824553,
+    "2": 0.9264773247824095,
+    "3": 0.9303710490151168,
+    "4": 0.9173156207054513,
+    "5": 0.9200641319285388,
+    "6": 0.9738891433806688,
+    "7": 0.9608337150710032,
+    "8": 0.9404489234997709,
+    "9": 0.9367842418689877,
+    "10": 0.9409070087036189,
+    "11": 0.9092991296381127,
+    "12": 0.9370132844709116,
+    "13": 0.9775538250114522,
+    "14": 0.9647274393037105,
+    "15": 0.9413650939074668,
+    "16": 0.9418231791113147,
+    "17": 0.9253321117727897,
+    "18": 0.9081539166284929,
+    "19": 0.9409070087036189,
+    "20": 0.9798442510306917,
+    "21": 0.9429683921209345,
+    "22": 0.9328905176362804,
+    "23": 0.934722858451672,
+    "24": 0.912963811268896,
+    "25": 0.9299129638112689,
+    "26": 0.93518094365552,
+    "27": 0.9633531836921667,
+    "28": 0.9434264773247825
+  },
+  "calibration_coverage_adjusted_by_horizon": {
+    "1": 0.9383875400824553,
+    "2": 0.9264773247824095,
+    "3": 0.9303710490151168,
+    "4": 0.9173156207054513,
+    "5": 0.9200641319285388,
+    "6": 0.9738891433806688,
+    "7": 0.9608337150710032,
+    "8": 0.9404489234997709,
+    "9": 0.9367842418689877,
+    "10": 0.9409070087036189,
+    "11": 0.9092991296381127,
+    "12": 0.9370132844709116,
+    "13": 0.9775538250114522,
+    "14": 0.9647274393037105,
+    "15": 0.9413650939074668,
+    "16": 0.9418231791113147,
+    "17": 0.9253321117727897,
+    "18": 0.9081539166284929,
+    "19": 0.9409070087036189,
+    "20": 0.9798442510306917,
+    "21": 0.9429683921209345,
+    "22": 0.9328905176362804,
+    "23": 0.934722858451672,
+    "24": 0.912963811268896,
+    "25": 0.9299129638112689,
+    "26": 0.93518094365552,
+    "27": 0.9633531836921667,
+    "28": 0.9434264773247825
+  },
+  "calibration_mean_width_raw_by_horizon": {
+    "1": 8.198277337855838,
+    "2": 8.287880215741996,
+    "3": 8.638582151220081,
+    "4": 9.044566741445976,
+    "5": 6.692050197012305,
+    "6": 2.376446171624239,
+    "7": 6.477794506405802,
+    "8": 8.283654617811745,
+    "9": 8.623810763373704,
+    "10": 9.083008594744229,
+    "11": 9.151340383624483,
+    "12": 6.99791243804089,
+    "13": 2.4950960656697316,
+    "14": 6.501525985858578,
+    "15": 8.318866821001386,
+    "16": 8.689297009395778,
+    "17": 8.699175296317591,
+    "18": 8.978282793997177,
+    "19": 7.260618260006064,
+    "20": 2.804214746646969,
+    "21": 6.814061084730961,
+    "22": 8.393825737462656,
+    "23": 8.746675303101094,
+    "24": 8.657414481987816,
+    "25": 9.014097896134897,
+    "26": 7.179561305808679,
+    "27": 3.055246401041145,
+    "28": 6.939604195907791
+  },
+  "calibration_mean_width_adjusted_by_horizon": {
+    "1": 8.198277337855838,
+    "2": 8.287880215741996,
+    "3": 8.638582151220081,
+    "4": 9.044566741445976,
+    "5": 6.692050197012305,
+    "6": 2.376446171624239,
+    "7": 6.477794506405802,
+    "8": 8.283654617811745,
+    "9": 8.623810763373704,
+    "10": 9.083008594744229,
+    "11": 9.151340383624483,
+    "12": 6.99791243804089,
+    "13": 2.4950960656697316,
+    "14": 6.501525985858578,
+    "15": 8.318866821001386,
+    "16": 8.689297009395778,
+    "17": 8.699175296317591,
+    "18": 8.978282793997177,
+    "19": 7.260618260006064,
+    "20": 2.804214746646969,
+    "21": 6.814061084730961,
+    "22": 8.393825737462656,
+    "23": 8.746675303101094,
+    "24": 8.657414481987816,
+    "25": 9.014097896134897,
+    "26": 7.179561305808679,
+    "27": 3.055246401041145,
+    "28": 6.939604195907791
+  },
+  "guarantee_note": "Empirical horizon-specific calibration only. Product/day dependence and prior exploratory exposure preclude a formal distribution-free guarantee for this retail panel."
+}

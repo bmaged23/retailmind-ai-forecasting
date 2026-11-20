@@ -1,0 +1,31 @@
+stock_code,description,stratum,split,review_status,review_pack_size,review_note
+20871,OPULENT VELVET SET/3 CANDLES,explicit,development,explicit_count,3.0,Explicit set/pack count in title
+20942,SET/6 GINGERBREAD TREE T-LIGHTS,explicit,development,explicit_count,6.0,Explicit set/pack count in title
+20950,SET/6  ANGEL T-LIGHTS WHITE/GOLD,explicit,development,explicit_count,6.0,Explicit set/pack count in title
+21085,SET/6 WOODLAND PAPER CUPS,explicit,development,explicit_count,6.0,Explicit set/pack count in title
+21088,SET/6 FRUIT SALAD PAPER CUPS,explicit,development,explicit_count,6.0,Explicit set/pack count in title
+21126,SET OF 6 GIRLS CELEBRATION CANDLES,explicit,development,explicit_count,6.0,Explicit set/pack count in title
+21983,PACK OF 12 BLUE PAISLEY TISSUES,explicit,development,explicit_count,12.0,Explicit set/pack count in title
+35004s,SET OF 3 SILVER FLYING DUCKS,explicit,development,explicit_count,3.0,Explicit set/pack count in title
+84509G,SET OF 4 FAIRY CAKE PLACEMATS,explicit,development,explicit_count,4.0,Explicit set/pack count in title
+84510c,SET OF 4 POLKADOT COASTERS,explicit,development,explicit_count,4.0,Explicit set/pack count in title
+21187,WHITE BELL HONEYCOMB PAPER GARLAND,other,development,no_explicit_count,,No unambiguous set/pack count in title
+21323,HANGING MEDINA LANTERN LARGE,other,development,no_explicit_count,,No unambiguous set/pack count in title
+21699,SET 5 MINI CHOCOLATE FRIDGE MAGNETS,other,development,explicit_count,5.0,Explicit set/pack count in title
+21728,METAL MEDINA LANTERN,other,development,no_explicit_count,,No unambiguous set/pack count in title
+22249,DECORATION WHITE CHICK MAGIC GARDEN,other,development,no_explicit_count,,No unambiguous set/pack count in title
+35596,WOOD XMAS TREE 9 FIG SHELVES,other,development,no_explicit_count,,No unambiguous set/pack count in title
+84869,CANDY BUTTON PHOTO ALBUM,other,development,no_explicit_count,,No unambiguous set/pack count in title
+85131B,BEADED CRYSTAL HEART GREEN ON STICK,other,development,no_explicit_count,,No unambiguous set/pack count in title
+90051,CRACKED GLAZE NECKLACE RED,other,development,no_explicit_count,,No unambiguous set/pack count in title
+90209C,PINK ENAMEL+GLASS HAIR COMB,other,development,no_explicit_count,,No unambiguous set/pack count in title
+20973,12 PENCIL SMALL TUBE WOODLAND,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+20982,12 PENCILS TALL TUBE SKULLS,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+21617,4 LILY  BOTANICAL DINNER CANDLES,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+22243,5 HOOK HANGER RED MAGIC TOADSTOOL,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+35999,S/6 SCANDINAVIAN HEART T-LIGHT,shorthand_or_leading,development,explicit_count,6.0,Explicit set/pack count in title
+84572,6 HOOK JEWEL STAND LILAC DRESS,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+84731,3 BIRDS CANVAS SCREEN,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+84993b,75 BLACK PETIT FOUR CASES,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain
+85112,S/3 TEAR DROP CUT GLASS DECORATION,shorthand_or_leading,development,explicit_count,3.0,Explicit set/pack count in title
+90199D,5 STRAND GLASS NECKLACE AMBER,shorthand_or_leading,development,ambiguous,,Leading number may describe contained or product attributes; abstain

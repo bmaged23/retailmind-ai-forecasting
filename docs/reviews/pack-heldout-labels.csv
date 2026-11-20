@@ -1,0 +1,31 @@
+stock_code,description,stratum,split,review_status,review_pack_size,review_note
+21087,SET/6 POSIES PAPER CUPS,explicit,heldout,explicit_count,6.0,Explicit set/pack count in title
+21306,SET/4 DAISY MIRROR MAGNETS,explicit,heldout,explicit_count,4.0,Explicit set/pack count in title
+21614,SET OF 12 ROSE BOTANICAL T-LIGHTS,explicit,heldout,explicit_count,12.0,Explicit set/pack count in title
+22497,SET OF 2 TINS VINTAGE BATHROOM,explicit,heldout,explicit_count,2.0,Explicit set/pack count in title
+22613,PACK OF 20 SPACEBOY NAPKINS,explicit,heldout,explicit_count,20.0,Explicit set/pack count in title
+22614,PACK OF 12 SPACEBOY TISSUES,explicit,heldout,explicit_count,12.0,Explicit set/pack count in title
+22638,SET OF 4 NAPKIN CHARMS CROWNS,explicit,heldout,explicit_count,4.0,Explicit set/pack count in title
+22639,SET OF 4 NAPKIN CHARMS HEARTS,explicit,heldout,explicit_count,4.0,Explicit set/pack count in title
+72817,SET OF 2 CHRISTMAS DECOUPAGE CANDLE,explicit,heldout,explicit_count,2.0,Explicit set/pack count in title
+84078A,SET/4 WHITE RETRO STORAGE CUBES,explicit,heldout,explicit_count,4.0,Explicit set/pack count in title
+20767,BLUE PAISLEY JOURNAL,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+20905,VINTAGE KEEPSAKE BOX BEAUTY GIRL,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+21682,LARGE MEDINA STAMPED METAL BOWL,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+22795,SWEETHEART RECIPE BOOK STAND,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+37464,ROBOT MUG IN DISPLAY BOX,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+72008,FROSTED BOX 9 WHITE T-LIGHT CANDLES,other,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+84601A,NEW BAROQUE IVORY CUSHION COVER,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+84660B,BLACK STITCHED WALL CLOCK,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+90214V,"LETTER ""V"" BLING KEY RING",other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+DCGS0075,CAMOUFLAGUE DOG LEAD,other,heldout,no_explicit_count,,No unambiguous set/pack count in title
+20975,12 PENCILS SMALL TUBE RED RETROSPOT,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+20979,36 PENCILS TUBE RED RETROSPOT,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+22283,6 EGG HOUSE PAINTED WOOD,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+22952,60 CAKE CASES VINTAGE CHRISTMAS,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+72751C,"F.FAIRY S/3 SML CANDLE, ROSE",shorthand_or_leading,heldout,explicit_count,3.0,Explicit set/pack count in title
+72753A,S/3 FLWR FAIRY LILLY CANDLES,shorthand_or_leading,heldout,explicit_count,3.0,Explicit set/pack count in title
+72800D,4 BLUE DINNER CANDLES SILVER FLOCK,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+84396,6 HOOK JEWELLERY STAND BLACK DRESS,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain
+84437A,S/6 PINK EASTER DECS IN BOX,shorthand_or_leading,heldout,explicit_count,6.0,Explicit set/pack count in title
+84993B,75 BLACK PETIT FOUR CASES,shorthand_or_leading,heldout,ambiguous,,Number may describe item attributes or contents; abstain

@@ -1,0 +1,28 @@
+"""Create a self-contained, searchable EDA page for candidate stock families."""
+from pathlib import Path
+import csv
+import html
+import json
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    generated = ROOT / 'reports/generated'
+    with (generated / 'candidate-family-audit.csv').open(newline='', encoding='utf-8') as f:
+        rows = list(csv.DictReader(f))
+    stats = json.loads((generated / 'candidate-family-audit.json').read_text())
+    case = json.loads((generated / 'code-case-audit.json').read_text())
+    safe_json = json.dumps(rows, ensure_ascii=False).replace('</', '<\\/')
+    page = '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RetailMind | Code family audit</title><style>
+    *{box-sizing:border-box}body{background:#080f1e;color:#e6edf8;font:15px/1.5 system-ui,sans-serif;margin:0}main{max-width:1450px;margin:auto;padding:36px}h1{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em;margin:8px 0}p{color:#aabbd0}.tag{color:#5eead4;font-size:12px;letter-spacing:.14em;text-transform:uppercase}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:25px 0}.card,.panel{background:#111b2e;border:1px solid #25344b;border-radius:14px;padding:18px}.card strong{display:block;font-size:30px}.card span{color:#9badc4;font-size:12px}.controls{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}input,select{background:#0b1424;color:#fff;border:1px solid #354861;border-radius:8px;padding:11px}input{min-width:250px;flex:1}.table{overflow:auto;max-height:720px}table{width:100%;border-collapse:collapse;font-size:13px}th{position:sticky;top:0;background:#17243a;text-align:left;color:#9badc4}th,td{padding:12px;border-bottom:1px solid #25344b;vertical-align:top}td:nth-child(3),td:nth-child(4){min-width:180px;max-width:600px;overflow-wrap:anywhere}a{color:#5eead4}.caution{border-left:3px solid #fb923c;padding-left:14px}@media(max-width:800px){main{padding:18px}.cards{grid-template-columns:1fr 1fr}}@media(max-width:480px){.cards{grid-template-columns:1fr}}
+    </style></head><body><main><a href="data-exploration.html">← Data dashboard</a><div class="tag" style="margin-top:25px">RetailMind / exploratory review</div><h1>Can stock codes reveal families?</h1><p>Candidate numeric bases are paired with descriptions available by 30 April 2011. Search any code, base or description.</p><section class="cards"><div class="card"><span>REPEATED CANDIDATE BASES</span><strong>__GROUPS__</strong><span>With at least two descriptions</span></div><div class="card"><span>PRODUCT CODES</span><strong>__PRODUCTS__</strong><span>In those candidate groups</span></div><div class="card"><span>CASE-ONLY COLLISIONS</span><strong>__CASE__</strong><span>Candidate family groups</span></div><div class="card"><span>CASE VARIANT PAIRS</span><strong>__VARIANTS__</strong><span>Normalized codes across full history</span></div></section><div class="panel caution"><strong>Hypotheses, not verified families.</strong><p>Similar descriptions can help prioritize manual review. Codes that differ only in case might refer to the same product, but no codes have been merged. The case-variant total and sales dates use full history; they are descriptive and cannot define a historical training cohort.</p></div><section class="panel" style="margin-top:16px"><div class="controls"><input id="search" type="search" placeholder="Search code or product description" aria-label="Search code or description"><select id="filter" aria-label="Review filter"><option value="all">All groups</option><option value="case">Case-only collisions</option><option value="low">Zero word overlap</option></select></div><p id="count"></p><div class="table"><table><thead><tr><th>Candidate base</th><th>Codes</th><th>Descriptions</th><th>Lowest word overlap</th><th>Case collision</th></tr></thead><tbody id="rows"></tbody></table></div></section><p>Word overlap ignores selected color and common terms and is a rough review signal; it is not a product-match score or model result. Source: <a href="https://doi.org/10.24432/C5CG6D">UCI Online Retail II</a>, CC BY 4.0.</p></main><script>
+    const data=__DATA__;function draw(){const q=document.getElementById('search').value.toLowerCase();const mode=document.getElementById('filter').value;const rows=data.filter(x=>(x.candidate_code_base+' '+x.codes+' '+x.descriptions).toLowerCase().includes(q)).filter(x=>mode==='all'||(mode==='case'&&x.case_only_collision==='True')||(mode==='low'&&x.min_token_similarity!==''&&Number(x.min_token_similarity)===0));const body=document.getElementById('rows');body.replaceChildren();for(const x of rows){const tr=document.createElement('tr');for(const value of [x.candidate_code_base,x.codes,x.descriptions,x.min_token_similarity?Number(x.min_token_similarity).toFixed(2):'—',x.case_only_collision==='True'?'Yes':'No']){const td=document.createElement('td');td.textContent=value;tr.appendChild(td)}body.appendChild(tr)}document.getElementById('count').textContent=`Showing ${rows.length} of ${data.length} candidate groups.`}document.getElementById('search').addEventListener('input',draw);document.getElementById('filter').addEventListener('change',draw);draw();</script></body></html>'''
+    for key, value in {'__DATA__': safe_json, '__GROUPS__': stats['groups'], '__PRODUCTS__': stats['products'],
+                       '__CASE__': stats['case_collision_groups'], '__VARIANTS__': case['normalized_groups']}.items():
+        page = page.replace(key, str(value))
+    output = ROOT/'reports/code-family-audit.html'
+    output.write_text(page, encoding='utf-8')
+    print('Wrote', output)
+
+if __name__ == '__main__': main()

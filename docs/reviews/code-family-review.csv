@@ -1,0 +1,16 @@
+candidate_code_base,n_codes,review,notes
+17129,3,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+17164,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+35638,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+44092,2,uncertain,Broadly related terms but exact family or variant relationship is unclear
+71101,2,uncertain,Broadly related terms but exact family or variant relationship is unclear
+79303,3,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+84201,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+84520,3,plausible_related,Related napkins; 84520B and 84520b share text and may be casing variants; do not merge without transaction-level review
+84531,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+85136,3,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+90011,5,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+90038,3,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+90039,4,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+90065,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified
+90197,2,plausible_related,Descriptions suggest related variants; manufacturer relationship unverified

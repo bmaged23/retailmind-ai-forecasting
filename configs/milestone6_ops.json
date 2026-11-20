@@ -1,0 +1,19 @@
+{
+  "name": "retailmind-local-operations-monitor",
+  "data_file": "data/processed/daily_sales.csv",
+  "forecast_config": "configs/milestone4_scenarios.json",
+  "model_plan_scorecard": "artifacts/milestone4_scenarios/model_plan_comparison/scorecard.json",
+  "interval_scorecard": "artifacts/milestone2_uncertainty/timestral209m_lora/scorecard.json",
+  "output_directory": "artifacts/milestone6/monitoring",
+  "max_data_age_days": 7,
+  "forecast_artifact_paths": [
+    "artifacts/foundation_models/test_2011-10-05_to_2011-11-01/forecasts/timestral209m_lora/timestral209m_lora.csv",
+    "artifacts/train-validation-test-2011-11-01/test-forecasts.csv",
+    "artifacts/foundation_models/test_2011-10-05_to_2011-11-01/forecasts/timesfm3_head_tuned/timesfm3_head_tuned.csv"
+  ],
+  "notes": [
+    "This monitor reports input freshness and fingerprints historical artifacts; it does not create new forecasts because no post-2011 sales feed is configured.",
+    "A stale-data warning does not trigger retraining or overwrite any model.",
+    "Metrics are historical reference metrics and are not production monitoring measurements."
+  ]
+}

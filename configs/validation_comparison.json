@@ -1,0 +1,40 @@
+{
+  "name": "leakage-safe-model-selection",
+  "data": "data/processed/daily_sales.csv",
+  "context_days": 90,
+  "horizon_days": 28,
+  "cohort_rule": "Product has at least one recorded sale on or before the tuning cutoff. Freeze cohort before reading selection-window targets. Build each 90-day context with zero recorded sales on dates without transactions.",
+  "tuning": {
+    "fit_targets_through": "2011-04-30",
+    "checkpoint_validation_start": "2011-05-01",
+    "checkpoint_validation_end": "2011-05-28",
+    "checkpoint_validation_is_not_scored_for_model_selection": true
+  },
+  "selection": {
+    "forecast_origin": "2011-06-30",
+    "target_start": "2011-07-01",
+    "target_end": "2011-07-28",
+    "targets_available_to_fit_or_checkpoint_selection": false,
+    "missing_transaction_dates": "zero recorded sales; this does not distinguish zero demand from unavailable or discontinued products"
+  },
+  "test": {
+    "period": ["2011-10-05", "2011-11-01"],
+    "status": "Previously reused; descriptive only and excluded from model selection"
+  },
+  "metrics": ["MAE", "RMSE", "WAPE", "mean_inference_seconds_per_product"],
+  "candidates": [
+    "seasonal_naive", "lightgbm", "lstm",
+    "chronos2_zero_shot", "chronos2_lora",
+    "timestral209m_zero_shot", "timestral209m_lora",
+    "timesfm25_zero_shot", "timesfm25_lora",
+    "timesfm3_zero_shot", "timesfm3_head_tuned",
+    "tirex2_zero_shot", "tirex2_head_tuned",
+    "toto2_22m_zero_shot", "toto2_22m_custom_lora"
+  ],
+  "prediction_policy": "Use each model's documented point forecast; clamp negative sales forecasts to zero.",
+  "resource_limits": {
+    "gpu_memory_mib_max": 2048,
+    "inference_batch_size": "Per-model, fixed before scoring and recorded in run metadata"
+  },
+  "selection_policy": "Choose on pooled validation MAE as the primary metric, inspect RMSE and WAPE as guardrails, and report latency separately. Compare only identical product-date keys."
+}

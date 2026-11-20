@@ -1,0 +1,67 @@
+{
+  "model": "mistralai/Timestral-209M",
+  "method": "custom LoRA fine-tuning",
+  "base_model_api": "Timestral PyTorch predict_block with quantile loss; upstream package has no trainer",
+  "train_end": "2011-04-30",
+  "validation_end": "2011-05-28",
+  "forecast_origin": "2011-06-30",
+  "forecast_targets_loaded": false,
+  "products": 4366,
+  "train_series": 4237,
+  "validation_sample_size": 256,
+  "validation_seed": 42,
+  "context_days": 90,
+  "model_padded_context_days": 96,
+  "horizon_days": 28,
+  "batch_size": 4,
+  "lora_rank": 4,
+  "lora_alpha": 8,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "max_epochs": 8,
+  "early_stopping_patience": 2,
+  "best_validation_loss": 1395.2378126181652,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 14631.252671902766,
+      "validation_loss": 1395.2383501342283
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1326.8052886796272,
+      "validation_loss": 1395.2384333204545
+    },
+    {
+      "epoch": 3,
+      "train_loss": 13190.895831600832,
+      "validation_loss": 1395.238230144011
+    },
+    {
+      "epoch": 4,
+      "train_loss": 9333.174176845794,
+      "validation_loss": 1395.2378126181652
+    },
+    {
+      "epoch": 5,
+      "train_loss": 3866.4089558642595,
+      "validation_loss": 1395.2378748247368
+    },
+    {
+      "epoch": 6,
+      "train_loss": 6705.032890298965,
+      "validation_loss": 1395.237855012474
+    }
+  ],
+  "fine_tune_seconds": 1879.7538205260007,
+  "inference_seconds": 49.94174185100201,
+  "gpu": {
+    "device_samples": 6576,
+    "sample_interval_seconds": 0.25,
+    "mean_gpu_utilization_percent": 26.005170316301705,
+    "peak_gpu_utilization_percent": 47,
+    "peak_device_memory_mib": 1019,
+    "note": "Device-wide sampled measurements; GPU utilization includes CPU preparation and inference. Short peaks between samples may be missed."
+  },
+  "forecast_file": "/home/bmage/projects/retailmind-ai-forecasting/artifacts/validation_comparison_2011-07-01_to_2011-07-28/forecasts/timestral209m_lora.csv"
+}

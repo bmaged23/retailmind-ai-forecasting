@@ -1,0 +1,35 @@
+{
+  "name": "single-cycle-inventory-policy-comparison",
+  "forecast_file": "artifacts/milestone2_uncertainty/timestral209m_lora/evaluation-intervals.csv",
+  "source_data": "data/processed/daily_sales.csv",
+  "forecast_origin": "2011-11-11",
+  "evaluation_start": "2011-11-12",
+  "evaluation_end": "2011-12-09",
+  "cohort_file": "artifacts/validation_comparison_2011-07-01_to_2011-07-28/cohort.json",
+  "context_days": 90,
+  "review_period_days": 7,
+  "forecast_safety_factor": 1.0,
+  "scenario_seed": 42,
+  "initial_stock_coverage_days_range": [3, 14],
+  "supplier_lead_time_days_range": [2, 10],
+  "incoming_order_probability": 0.25,
+  "incoming_order_coverage_weeks_range": [0.5, 1.5],
+  "incoming_order_arrival_days_range": [1, 14],
+  "cost_assumptions_gbp": {
+    "holding_cost_per_unit_day": 0.05,
+    "order_cost_per_order": 5.0,
+    "shortage_penalty_per_unmet_unit": 2.0,
+    "unit_purchase_cost": null
+  },
+  "policies": [
+    "timestral_p50_plus_p90_buffer",
+    "seasonal_naive_order_up_to"
+  ],
+  "notes": [
+    "Scenario inputs are synthetic, not observed inventory or supplier data.",
+    "Each policy places at most one new order at the forecast origin; no new forecasts are generated during replay.",
+    "Daily recorded sales are used as demand proxy and are not uncensored demand.",
+    "Daily P90 values are summed as a safety-stock heuristic; their sum is not a calibrated aggregate quantile.",
+    "Purchase cost is excluded because transaction unit prices are not valid inventory procurement costs."
+  ]
+}

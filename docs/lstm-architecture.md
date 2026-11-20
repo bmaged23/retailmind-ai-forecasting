@@ -1,0 +1,9 @@
+# Initial global LSTM
+
+The proposed baseline is a global, univariate model shared across products: one input channel (daily recorded gross sales), a 90-day context, one LSTM layer with 32 hidden units, and a linear head predicting one next-day value. It recursively feeds predictions back to generate 28 days. It does not use product identifiers, calendar, price or inventory. Each input window is divided by its historical mean (minimum scale 1) and transformed with `log1p`; the predicted log value is inverted and constrained nonnegative. This scaling is recalculated from each window, including recursively predicted values. No future actual sales are used as features.
+
+Training settings: Adam, learning rate 0.001, batch size 64, up to 20 epochs, seed 42, mean squared error on the normalized log scale, no dropout and no weight decay. Each fold trains on a maximum of 180 windows per product. The last 28 target days available before each benchmark cutoff are reserved for internal chronological early stopping, with patience 3 epochs, minimum improvement 1e-6, and restoration of the best weights. These are initial settings, not a tuned architecture. The internal early-stopping period is distinct from the 28-day benchmark forecast period.
+
+This sales-only baseline is one track, not a claim that sales alone are optimal. A separate planned track will add known-future calendar features and compare results on the same folds; future price and inventory will not be supplied unless known at forecast time.
+
+The experiment currently uses CPU. GPU is accessible outside the sandbox but a framework allocator cap does not bound every driver and library allocation. Do not run GPU training or inference unless the user's 2 GB total VRAM constraint can be enforced and measured. Report hardware, memory, latency, model settings and excluded cases. Foundation-model comparisons and final testing are not complete.

@@ -1,0 +1,17 @@
+.git
+.venv
+.cache
+.pytest_cache
+__pycache__
+*.py[cod]
+*.egg-info
+artifacts
+data
+reports/generated
+notebooks
+tests
+reports/*.html
+reports/*.png
+dist
+build
+uv.lock.tmp
