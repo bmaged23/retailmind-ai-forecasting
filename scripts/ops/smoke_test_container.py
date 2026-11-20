@@ -30,7 +30,7 @@ def wait_until_ready(base_url: str, timeout: int) -> dict:
             result = call(base_url, "/ready")
             if result.get("status") == "ready":
                 return result
-        except (URLError, TimeoutError, RuntimeError) as exc:
+        except (URLError, TimeoutError, RuntimeError, ConnectionError) as exc:
             last_error = exc
         time.sleep(3)
     raise TimeoutError(f"API did not become ready within {timeout}s: {last_error}")
