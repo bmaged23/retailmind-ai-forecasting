@@ -1,6 +1,64 @@
-# RetailMind AI: Retail Demand Forecasting
+# RetailMind AI · Retail Demand Forecasting
 
-A reproducible research project for 28-day retail sales forecasting and, in later milestones, inventory decisions. The project uses observed sales; the source data cannot reveal demand lost to stockouts.
+**Forecast demand. Quantify uncertainty. Support inventory decisions.**
+
+RetailMind is an end-to-end retail forecasting project: exploratory analysis, a common-cohort comparison of statistical, neural and foundation models, probabilistic forecasts, inventory simulations, and a containerized FastAPI service. The selected deployment uses a fine-tuned Timestral 209M LoRA adapter.
+
+**4,366 products** · **15 candidate variants** · **28-day horizon** · **122,248 predictions per candidate**
+
+![Model comparison chart](docs/images/model-comparison.svg)
+
+## Model comparison
+
+All candidates below were scored on the same product-date keys for **1–28 July 2011**. Pooled MAE selected the winner; RMSE and WAPE provide additional views. The lead was close: Timestral LoRA's MAE was **2.331**, compared with **2.346** for Chronos-2 LoRA, a difference of about **0.6%**. TimesFM 2.5 LoRA had the lowest RMSE, so the winner depends on the metric.
+
+| Model | MAE ↓ | RMSE ↓ | WAPE ↓ | Mean inference ms/product* |
+|---|---:|---:|---:|---:|
+| Timestral 209M LoRA | 2.331 | 19.488 | 91.6% | 11.44 |
+| Chronos-2 LoRA | 2.346 | 19.551 | 92.2% | 6.90 |
+| Chronos-2 zero-shot | 2.363 | 19.490 | 92.9% | 2.93 |
+| Toto 2.0 custom LoRA | 2.363 | 19.662 | 92.9% | 2.35 |
+| Timestral 209M zero-shot | 2.365 | 19.473 | 93.0% | 7.27 |
+| TiRex-2 head-tuned | 2.403 | 19.723 | 94.5% | 26.39 |
+| TiRex-2 zero-shot | 2.409 | 19.666 | 94.7% | 27.77 |
+| TimesFM 2.5 zero-shot | 2.410 | 19.457 | 94.7% | 12.58 |
+| Toto 2.0 zero-shot | 2.429 | 19.590 | 95.5% | 1.82 |
+| TimesFM 3.0 head-tuned | 2.511 | 20.209 | 98.7% | 181.88 |
+| TimesFM 3.0 zero-shot | 2.553 | 20.291 | 100.4% | 151.13 |
+| LSTM | 2.562 | 19.018 | 100.7% | 19.14 |
+| TimesFM 2.5 LoRA | 3.063 | 18.971 | 120.4% | 18.86 |
+| Seasonal naive | 3.435 | 24.310 | 135.0% | 0.00 |
+| LightGBM | 5.110 | 19.707 | 200.9% | 2.08 |
+
+
+*Latency is reported as mean seconds divided by products in each recorded run, converted to milliseconds. Models used different batch sizes and execution paths; it is **not** a controlled single-request latency comparison. The deployed container smoke test measured approximately 9.3 seconds for one first forecast request including model loading.
+
+**Interpretation:** July was used for model selection, not an untouched final test. The October evaluation was reused. The bundled adapter comes from the earlier validation run; the exact October checkpoint was not retained, so October scores cannot be attributed to the packaged checkpoint. Observed sales can be censored by stockouts. The data ends in 2011.
+
+## Explore the project
+
+| Area | Visual guide | Technical details |
+|---|---|---|
+| Model evaluation | [Evaluation dashboard](reports/comparison/validation-comparison.html) · [Evaluation guide](reports/evaluation.html) | [Evaluation README](docs/evaluation/README.md) · [scorecard](reports/comparison/scorecard.json) |
+| Forecast API | [API guide](reports/api.html) | [API README](docs/api/README.md) · [endpoint reference](docs/forecast-api.md) |
+| Docker deployment | [Docker guide](reports/docker.html) | [Deployment README](docs/docker/README.md) |
+| CI/CD | [CI/CD guide](reports/cicd.html) | [CI/CD README](docs/cicd/README.md) · [workflow](.github/workflows/docker-image-ci.yml) |
+| Data & features | [Data exploration](reports/data-exploration.html) · [Feature EDA](reports/feature-eda.html) | [Feature inventory](docs/feature-inventory.md) |
+| Decisions | [Uncertainty](reports/milestone2-uncertainty.html) · [Inventory](reports/milestone3-inventory.html) · [Scenarios](reports/milestone4-scenarios.html) | [Inventory methodology](docs/milestone3-inventory.md) |
+
+GitHub displays HTML files as source; download the repository and open these reports in a browser to use the dashboards.
+
+## Quick start
+
+```bash
+docker build -t retailmind-ai-forecasting:local .
+docker run --rm -p 8000:8000 retailmind-ai-forecasting:local
+# Open http://localhost:8000/docs
+```
+
+For NVIDIA GPU inference add `--gpus all`; the service caps the PyTorch allocator at 2,048 MiB. The image includes the base model and adapter. Review [model license](models/timestral209m_lora/LICENSE) before distributing the image. See [deployment](docs/docker/README.md) for smoke tests and operating details.
+
+---
 
 ## Milestone 1: demand forecasting — comparison complete
 

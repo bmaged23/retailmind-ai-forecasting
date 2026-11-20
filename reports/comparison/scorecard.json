@@ -1,0 +1,151 @@
+{
+  "config": "configs/validation_comparison.json",
+  "cohort_file": "artifacts/validation_comparison_2011-07-01_to_2011-07-28/cohort.json",
+  "forecast_origin": "2011-06-30",
+  "selection_period": [
+    "2011-07-01",
+    "2011-07-28"
+  ],
+  "products": 4366,
+  "rows_per_model": 122248,
+  "scored_only_after_all_forecasts_frozen": true,
+  "models": [
+    {
+      "model": "timestral209m_lora",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.331443901289382,
+      "rmse": 19.488019820965018,
+      "wape": 0.9164743369395298,
+      "mean_inference_seconds_per_product": 0.011438786498168119
+    },
+    {
+      "model": "chronos2_lora",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.345630341239215,
+      "rmse": 19.55130380882895,
+      "wape": 0.9220509275404726,
+      "mean_inference_seconds_per_product": 0.006903128969995394
+    },
+    {
+      "model": "chronos2_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.363304073752559,
+      "rmse": 19.490262224415645,
+      "wape": 0.9289983485260068,
+      "mean_inference_seconds_per_product": 0.0029260255002292023
+    },
+    {
+      "model": "toto2_22m_custom_lora",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.3633995152505447,
+      "rmse": 19.662372896244488,
+      "wape": 0.9290358659132082,
+      "mean_inference_seconds_per_product": 0.0023459444072377908
+    },
+    {
+      "model": "timestral209m_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.3649187344082256,
+      "rmse": 19.47271314479768,
+      "wape": 0.9296330603682972,
+      "mean_inference_seconds_per_product": 0.007267040030691784
+    },
+    {
+      "model": "tirex2_head_tuned",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.40326006268492,
+      "rmse": 19.722805836294075,
+      "wape": 0.9447047691022414,
+      "mean_inference_seconds_per_product": 0.026389491917773712
+    },
+    {
+      "model": "tirex2_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.4085828884691987,
+      "rmse": 19.665879815879197,
+      "wape": 0.9467971347939887,
+      "mean_inference_seconds_per_product": 0.02776544475767294
+    },
+    {
+      "model": "timesfm25_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.4096436898927105,
+      "rmse": 19.456979277210454,
+      "wape": 0.947214128435011,
+      "mean_inference_seconds_per_product": 0.012577369273476647
+    },
+    {
+      "model": "toto2_22m_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.428504637337917,
+      "rmse": 19.589574851967832,
+      "wape": 0.9546282353300288,
+      "mean_inference_seconds_per_product": 0.001822092593220373
+    },
+    {
+      "model": "timesfm3_head_tuned",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.5110933591176177,
+      "rmse": 20.2085995525325,
+      "wape": 0.987093285846524,
+      "mean_inference_seconds_per_product": 0.18188010608176833
+    },
+    {
+      "model": "timesfm3_zero_shot",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.5531412932822595,
+      "rmse": 20.29097855600174,
+      "wape": 1.0036220355032948,
+      "mean_inference_seconds_per_product": 0.15113423256023834
+    },
+    {
+      "model": "lstm",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 2.5618497847394615,
+      "rmse": 19.018294365235043,
+      "wape": 1.0070452827577405,
+      "mean_inference_seconds_per_product": 0.019142719717361294
+    },
+    {
+      "model": "timesfm25_lora",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 3.062861219401852,
+      "rmse": 18.971126765135605,
+      "wape": 1.2039893834188804,
+      "mean_inference_seconds_per_product": 0.01885617513490639
+    },
+    {
+      "model": "seasonal_naive",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 3.435000981611151,
+      "rmse": 24.310099555194807,
+      "wape": 1.3502749284542912,
+      "mean_inference_seconds_per_product": 3.751534585501913e-06
+    },
+    {
+      "model": "lightgbm",
+      "products": 4366,
+      "forecast_rows": 122248,
+      "mae": 5.109909155691985,
+      "rmse": 19.70749422195318,
+      "wape": 2.0086696500370875,
+      "mean_inference_seconds_per_product": 0.0020785613195144657
+    }
+  ],
+  "selection_policy": "Choose on pooled validation MAE as the primary metric, inspect RMSE and WAPE as guardrails, and report latency separately. Compare only identical product-date keys.",
+  "target_assumption": "zero recorded sales; this does not distinguish zero demand from unavailable or discontinued products"
+}
