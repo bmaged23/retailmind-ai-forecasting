@@ -4,7 +4,9 @@
 
 RetailMind brings together retail data analysis, a comparison of 15 forecasting candidates, probabilistic forecasts and a containerized API for inventory decision support.
 
-![Animated production flow: sales history, quantity forecast, intervals, inventory and proposal](docs/images/production-flow.gif)
+![RetailMind illustrated production flow](docs/images/production-flow.gif)
+
+[Download the shareable MP4](docs/images/retailmind-production.mp4) · [Download the GIF](docs/images/production-flow.gif)
 
 A caller sends daily sales history → Timestral forecasts quantities → calibrated daily intervals show uncertainty → inventory rules combine forecasts with stock and lead time → the API returns an order proposal and scenario results. Proposals are advisory; the service does not place orders.
 
@@ -59,7 +61,7 @@ FastAPI provides single and batch forecasts, P10/P50/P90 and calibrated bounds, 
 
 ## Docker & deployment
 
-The image packages the pinned Timestral base weights, fine-tuned adapter and API. A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
+The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting) (the initial image upload is in progress). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
 
 ```bash
 docker build -t retailmind-ai-forecasting:local .
@@ -75,4 +77,4 @@ GitHub Actions builds the image, starts the service and runs a real-model API sm
 
 ## More analysis
 
-[Uncertainty report](reports/milestone2-uncertainty.html) · [Inventory simulation](reports/milestone3-inventory.html) · [Scenario analysis](reports/milestone4-scenarios.html) · [Model evaluation dashboard](reports/model-evaluation.html)
+[Uncertainty report](reports/milestone2-uncertainty.html) · [Inventory simulation](reports/milestone3-inventory.html) · [Scenario analysis](reports/milestone4-scenarios.html)

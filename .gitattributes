@@ -1,4 +1,3 @@
-# Exported interactive reports are generated from Python and notebook analyses.
-reports/*.html linguist-generated=true
-reports/comparison/*.html linguist-generated=true
+# Generated HTML dashboards and notebooks are retained for readers but excluded from language statistics.
+reports/** linguist-generated=true linguist-detectable=false
 *.ipynb linguist-detectable=false

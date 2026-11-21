@@ -19,3 +19,11 @@ The corrected Dockerfile-built image passed scripts/ops/smoke_test_container.py 
 Review models/timestral209m_lora/LICENSE before distributing the model or image. The license includes a monthly revenue condition.
 
 [Detailed reference](../milestone6-mlops.md) · [Visual guide](../../reports/docker.html) · [Project README](../../README.md)
+
+## Docker Hub
+
+[RetailMind AI Forecasting on Docker Hub](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). The initial upload is in progress; once it completes, pull it with:
+
+```sh
+docker pull bmaged23/retailmind-ai-forecasting:latest
+```
