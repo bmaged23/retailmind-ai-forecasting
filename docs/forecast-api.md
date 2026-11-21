@@ -75,4 +75,4 @@ before publishing or distributing the Docker image.
 
 ## Visual guide
 
-Open the [API HTML guide](../reports/api.html) in a browser, and see the [report index](../reports/README.md) for evaluation, uncertainty, inventory and deployment dashboards.
+Open the [API HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) in a browser, and see the [report index](../reports/README.md) for evaluation, uncertainty, inventory and deployment dashboards.

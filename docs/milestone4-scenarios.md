@@ -104,7 +104,7 @@ From the repository root:
 PYTHONPATH=src .venv/bin/python scripts/simulate_scenarios.py
 ```
 
-Open [`reports/milestone4-scenarios.html`](../reports/milestone4-scenarios.html).
+Open [`reports/milestone4-scenarios.html`](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone4-scenarios.html).
 Scorecard, per-SKU order plans, scenario outcomes, daily unmet units, and
 stress-factor tables are generated under
 `artifacts/milestone4_scenarios/model_plan_comparison/`.

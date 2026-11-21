@@ -84,7 +84,7 @@ PYTHONPATH=src python3 scripts/simulate_inventory.py
 ```
 
 The run writes a shareable dashboard at
-[`reports/milestone3-inventory.html`](../reports/milestone3-inventory.html),
+[`reports/milestone3-inventory.html`](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone3-inventory.html),
 plus a JSON scorecard and product-level recommendations and daily ledger under
 `artifacts/milestone3_inventory/timestral209m_lora/`. Artifacts and source data
 are excluded from Git; the configuration and simulator are tracked.

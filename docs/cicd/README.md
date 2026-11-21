@@ -18,8 +18,8 @@ After success on main, Docker Hub login uses DOCKERHUB_USERNAME and DOCKERHUB_TO
 
 GitHub Actions has completed a hosted build and real-model smoke test successfully. The initial verified image was pushed to Docker Hub separately. Automated publication is skipped with a warning until both Docker Hub repository secrets are configured; a successful CI run alone does not confirm a new image was published.
 
-[Detailed reference](../../.github/workflows/docker-image-ci.yml) · [Visual guide](../../reports/cicd.html) · [Project README](../../README.md)
+[Detailed reference](../../.github/workflows/docker-image-ci.yml) · [Visual guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/cicd.html) · [Project README](../../README.md)
 
 ## Visual guides
 
-[CI/CD HTML guide](../../reports/cicd.html) · [Docker HTML guide](../../reports/docker.html) · [API HTML guide](../../reports/api.html) · [Report index](../../reports/README.md). Open the HTML files in a browser after downloading the repository.
+[CI/CD HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/cicd.html) · [Docker HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/docker.html) · [API HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) · [Report index](../../reports/README.md). The HTML guides open directly in your browser.

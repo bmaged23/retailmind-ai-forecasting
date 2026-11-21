@@ -1,0 +1,46 @@
+name: Publish interactive reports
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'reports/**'
+      - 'docs/images/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+      - name: Prepare report site
+        run: |
+          mkdir -p _site/reports/comparison _site/docs/images
+          cp reports/*.html _site/reports/
+          cp reports/comparison/*.html _site/reports/comparison/
+          cp docs/images/model-comparison.svg _site/docs/images/
+          printf '%s\n' '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=reports/"><title>RetailMind reports</title></head><body><a href="reports/">Open RetailMind reports</a></body></html>' > _site/index.html
+          touch _site/.nojekyll
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload report site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy reports
+        id: deployment
+        uses: actions/deploy-pages@v4

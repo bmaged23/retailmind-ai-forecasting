@@ -21,7 +21,7 @@ The corrected Dockerfile-built image passed scripts/ops/smoke_test_container.py 
 
 Review models/timestral209m_lora/LICENSE before distributing the model or image. The license includes a monthly revenue condition.
 
-[Detailed reference](../milestone6-mlops.md) · [Visual guide](../../reports/docker.html) · [Project README](../../README.md)
+[Detailed reference](../milestone6-mlops.md) · [Visual guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/docker.html) · [Project README](../../README.md)
 
 ## Docker Hub
 
@@ -33,4 +33,4 @@ docker pull bmaged23/retailmind-ai-forecasting:latest
 
 ## Visual guides
 
-[Docker HTML guide](../../reports/docker.html) · [API HTML guide](../../reports/api.html) · [CI/CD HTML guide](../../reports/cicd.html) · [Report index](../../reports/README.md). Open the HTML files in a browser after downloading the repository.
+[Docker HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/docker.html) · [API HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) · [CI/CD HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/cicd.html) · [Report index](../../reports/README.md). The HTML guides open directly in your browser.

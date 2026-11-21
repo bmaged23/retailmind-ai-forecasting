@@ -18,8 +18,8 @@ POST /api/v1/inventory/proposal suggests an order quantity; /api/v1/inventory/sc
 
 The local Docker smoke test passed a real seven-day forecast, interval checks, a proposal, a scenario, and holdout evaluation. Interactive OpenAPI documentation is served at /docs.
 
-[Detailed reference](../forecast-api.md) · [Visual guide](../../reports/api.html) · [Project README](../../README.md)
+[Detailed reference](../forecast-api.md) · [Visual guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) · [Project README](../../README.md)
 
 ## Related reports
 
-[API HTML guide](../../reports/api.html) · [Model evaluation](../../reports/comparison/validation-comparison.html) · [Uncertainty](../../reports/milestone2-uncertainty.html) · [Inventory simulation](../../reports/milestone3-inventory.html) · [Report index](../../reports/README.md). Open HTML files in a browser after downloading the repository.
+[API HTML guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) · [Model evaluation](https://bmaged23.github.io/retailmind-ai-forecasting/reports/comparison/validation-comparison.html) · [Uncertainty](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone2-uncertainty.html) · [Inventory simulation](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone3-inventory.html) · [Report index](../../reports/README.md). The HTML reports open directly in your browser.

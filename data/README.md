@@ -8,4 +8,4 @@ Raw data and generated data are ignored by Git. Run `uv run retailmind prepare d
 
 ## Visual reports
 
-Open the [data exploration dashboard](../reports/data-exploration.html), [feature analysis](../reports/feature-eda.html), and [product-code audit](../reports/code-family-audit.html) in a browser. These are retained in the repository; raw and processed datasets remain excluded from Git. See the [report index](../reports/README.md) for the full set.
+Open the [data exploration dashboard](https://bmaged23.github.io/retailmind-ai-forecasting/reports/data-exploration.html), [feature analysis](https://bmaged23.github.io/retailmind-ai-forecasting/reports/feature-eda.html), and [product-code audit](https://bmaged23.github.io/retailmind-ai-forecasting/reports/code-family-audit.html) in a browser. These are retained in the repository; raw and processed datasets remain excluded from Git. See the [report index](../reports/README.md) for the full set.

@@ -38,7 +38,7 @@ For technical readers, the project compares **15 model variants on 4,366 product
 
 The research uses the **UCI Online Retail II** UK retailer dataset: **1,067,371 transaction lines** across two workbook sheets from 2009–2011. The cleaning audit records **1,037,019 included lines** after the configured exclusions; these are transaction rows, not products. Transactions were cleaned and aggregated into daily product sales; cancellations, non-product codes, missing dates and price features were investigated. A frozen cohort of **4,366 products** was used for the common model comparison. A zero in the series represents zero *recorded sales*, which can include stockouts or unavailable products. The dataset does not reveal product quality, production country or unsatisfied demand.
 
-Explore the interactive [data dashboard](reports/data-exploration.html), [feature analysis](reports/feature-eda.html), and [product-code audit](reports/code-family-audit.html). See [data setup](data/README.md) and [feature inventory](docs/feature-inventory.md) for the inputs and transformations. Download the repository and open HTML files in a browser; GitHub displays HTML as source.
+Explore the interactive [data dashboard](https://bmaged23.github.io/retailmind-ai-forecasting/reports/data-exploration.html), [feature analysis](https://bmaged23.github.io/retailmind-ai-forecasting/reports/feature-eda.html), and [product-code audit](https://bmaged23.github.io/retailmind-ai-forecasting/reports/code-family-audit.html). See [data setup](data/README.md) and [feature inventory](docs/feature-inventory.md) for the inputs and transformations. The dashboards open directly in your browser on [RetailMind Reports](https://bmaged23.github.io/retailmind-ai-forecasting/).
 
 ## Evaluation & model comparison
 
@@ -79,16 +79,16 @@ The common model-selection window is **1–28 July 2011**. Forecasts were frozen
 
 - **Why Timestral?** It had the lowest pooled MAE on the common July selection window: **2.331 units per product per day**, versus **3.435** for seasonal naive. Chronos-2 LoRA was close at **2.346**, so this was a competitive selection rather than a runaway win.
 - **What does WAPE mean?** The selected model’s pooled WAPE was **91.6%** on this sparse historical dataset. It is the absolute error summed across all predictions divided by total recorded sales, and it shows that the task remained difficult even for the leading candidate.
-- **How wide are the intervals?** In a separate November–December historical evaluation, the daily P10–P90 interval covered **91.53%** of observations, with mean width **10.159 units**. That is above the nominal 80% interval; coverage is not guaranteed for each product or for future business data. [Uncertainty report](reports/milestone2-uncertainty.html) · [Method and limitations](docs/milestone2-uncertainty.md).
-- **What about inventory savings?** The inventory study used synthetic stock and supplier assumptions, because those fields were absent from the dataset. Its outcomes are simulations, not measured business savings. [Inventory report](reports/milestone3-inventory.html) · [Scenario report](reports/milestone4-scenarios.html).
+- **How wide are the intervals?** In a separate November–December historical evaluation, the daily P10–P90 interval covered **91.53%** of observations, with mean width **10.159 units**. That is above the nominal 80% interval; coverage is not guaranteed for each product or for future business data. [Uncertainty report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone2-uncertainty.html) · [Method and limitations](docs/milestone2-uncertainty.md).
+- **What about inventory savings?** The inventory study used synthetic stock and supplier assumptions, because those fields were absent from the dataset. Its outcomes are simulations, not measured business savings. [Inventory report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone3-inventory.html) · [Scenario report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone4-scenarios.html).
 
 *Latency is the recorded batch-run time divided by products, not a controlled single-request comparison. Models used different batch sizes and execution paths.*
 
-**Evaluation limits:** July selected the model; it is not an untouched final test. The October window was reused. The packaged LoRA adapter comes from the earlier validation run; the exact October checkpoint was not retained, so October scores cannot be attributed to the deployed checkpoint. See the [interactive comparison](reports/comparison/validation-comparison.html), [evaluation guide](reports/evaluation.html), [methodology](docs/validation-comparison.md), [scorecard](reports/comparison/scorecard.json), and [evaluation scripts](scripts/foundation_models/).
+**Evaluation limits:** July selected the model; it is not an untouched final test. The October window was reused. The packaged LoRA adapter comes from the earlier validation run; the exact October checkpoint was not retained, so October scores cannot be attributed to the deployed checkpoint. See the [interactive comparison](https://bmaged23.github.io/retailmind-ai-forecasting/reports/comparison/validation-comparison.html), [evaluation guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/evaluation.html), [methodology](docs/validation-comparison.md), [scorecard](reports/comparison/scorecard.json), and [evaluation scripts](scripts/foundation_models/).
 
 ## Forecast API
 
-FastAPI provides single and batch forecasts, P10/P50/P90 and calibrated bounds, chronological holdout evaluation, reorder proposals and supply scenarios. OpenAPI documentation is served at `/docs`. [API visual guide](reports/api.html) · [API reference](docs/forecast-api.md)
+FastAPI provides single and batch forecasts, P10/P50/P90 and calibrated bounds, chronological holdout evaluation, reorder proposals and supply scenarios. OpenAPI documentation is served at `/docs`. [API visual guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/api.html) · [API reference](docs/forecast-api.md)
 
 | What you send | What you get | Why it helps |
 |---|---|---|
@@ -101,7 +101,7 @@ The deployed model uses the supplied **quantity history**. Product descriptions,
 
 ## Docker & deployment
 
-The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
+The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/docker.html) · [Deployment details](docs/docker/README.md)
 
 ```bash
 # Pull and run the tested image.
@@ -114,12 +114,12 @@ Add `--gpus all` when the NVIDIA container runtime is available. Review the [mod
 
 ## CI/CD
 
-GitHub Actions builds the image, starts the service and runs a real-model API smoke test. A successful run on `main` publishes the tested image when the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` repository secrets are configured; otherwise publication is skipped with a warning. [CI/CD guide](reports/cicd.html) · [Workflow](.github/workflows/docker-image-ci.yml)
+GitHub Actions builds the image, starts the service and runs a real-model API smoke test. A successful run on `main` publishes the tested image when the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` repository secrets are configured; otherwise publication is skipped with a warning. [CI/CD guide](https://bmaged23.github.io/retailmind-ai-forecasting/reports/cicd.html) · [Workflow](.github/workflows/docker-image-ci.yml)
 
 ## Reports and reproducibility
 
-The [report index](reports/README.md) links each HTML dashboard to its supporting README, source and limitations. Forecast CSVs, raw data and other generated artifacts are excluded from Git; the checked-in [selection scorecard](reports/comparison/scorecard.json) and evaluation scripts document the reported comparison.
+The [interactive report hub](https://bmaged23.github.io/retailmind-ai-forecasting/) opens every dashboard in your browser. The [report index](reports/README.md) links each HTML dashboard to its supporting README, source and limitations. Forecast CSVs, raw data and other generated artifacts are excluded from Git; the checked-in [selection scorecard](reports/comparison/scorecard.json) and evaluation scripts document the reported comparison.
 
 ## More analysis
 
-[Uncertainty report](reports/milestone2-uncertainty.html) · [Inventory simulation](reports/milestone3-inventory.html) · [Scenario analysis](reports/milestone4-scenarios.html)
+[Uncertainty report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone2-uncertainty.html) · [Inventory simulation](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone3-inventory.html) · [Scenario analysis](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone4-scenarios.html)

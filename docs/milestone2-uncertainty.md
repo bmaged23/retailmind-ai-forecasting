@@ -108,3 +108,5 @@ The Timestral base weights are cached under the project's ignored `.cache/`
 directory, not in source control. The generated adapter and forecast artifacts
 are also excluded from Git. Review the base model and adapter license terms
 before publishing or deploying.
+
+[Open the interactive uncertainty report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone2-uncertainty.html).
