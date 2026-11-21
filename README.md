@@ -34,6 +34,49 @@ For technical readers, the project compares **15 model variants on 4,366 product
 
 *Illustration only:* if seven days of forecast demand total 35 units, a 10% safety fraction adds 3.5 units and stock on hand plus in transit totals 25 units, the API proposes **14 units** after rounding up. No interval buffer is included in this example. The protection period must fit within the supplied forecast horizon. See the [inventory API reference](docs/forecast-api.md#other-operations).
 
+## Try the forecasting API
+
+After starting the container using the [Docker instructions](#docker--deployment), send seven consecutive days of recorded sales. This request asks for a one-day forecast:
+
+```bash
+curl -X POST http://localhost:8000/api/v1/forecast \
+  -H 'Content-Type: application/json' \
+  -d '{"series":{"series_id":"SKU-1001","history":[
+    {"date":"2025-01-01","quantity":4},
+    {"date":"2025-01-02","quantity":0},
+    {"date":"2025-01-03","quantity":7},
+    {"date":"2025-01-04","quantity":2},
+    {"date":"2025-01-05","quantity":3},
+    {"date":"2025-01-06","quantity":5},
+    {"date":"2025-01-07","quantity":1}
+  ]},"horizon_days":1}'
+```
+
+A real run of the packaged model returned the following **shortened and rounded** response; the full response also includes model metadata and timing:
+
+```json
+{
+  "series_id": "SKU-1001",
+  "forecast_origin": "2025-01-07",
+  "horizon_days": 1,
+  "methods": {
+    "timestral209m_lora": {
+      "predictions": [{
+        "date": "2025-01-08",
+        "demand_units": 3.411,
+        "p10": 0.0,
+        "p50": 3.411,
+        "p90": 7.072,
+        "calibrated_lower": 0.0,
+        "calibrated_upper": 7.072
+      }]
+    }
+  }
+}
+```
+
+P50 is the central daily forecast; the other values express daily uncertainty. Results and timing may vary by hardware and inputs. See the [API reference](docs/forecast-api.md) for batch forecasts, evaluation and inventory requests.
+
 ## Data & exploration
 
 The research uses the **UCI Online Retail II** UK retailer dataset: **1,067,371 transaction lines** across two workbook sheets from 2009–2011. The cleaning audit records **1,037,019 included lines** after the configured exclusions; these are transaction rows, not products. Transactions were cleaned and aggregated into daily product sales; cancellations, non-product codes, missing dates and price features were investigated. A frozen cohort of **4,366 products** was used for the common model comparison. A zero in the series represents zero *recorded sales*, which can include stockouts or unavailable products. The dataset does not reveal product quality, production country or unsatisfied demand.
@@ -123,3 +166,7 @@ The [interactive report hub](https://bmaged23.github.io/retailmind-ai-forecastin
 ## More analysis
 
 [Uncertainty report](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone2-uncertainty.html) · [Inventory simulation](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone3-inventory.html) · [Scenario analysis](https://bmaged23.github.io/retailmind-ai-forecasting/reports/milestone4-scenarios.html)
+
+## License and attribution
+
+The original project code and documentation are available under the [MIT License](LICENSE), copyright © 2026 Nessim Bola. MIT permits commercial use and requires the copyright and license notice to be retained. Third-party components have their own terms: in particular, the bundled Timestral base model and LoRA adapter are subject to the separate [Mistral Modified MIT model license](models/timestral209m_lora/LICENSE), including its monthly-revenue restriction. The [Online Retail II dataset](data/README.md) has its own CC BY 4.0 terms. The project code license does not override those third-party licenses.
