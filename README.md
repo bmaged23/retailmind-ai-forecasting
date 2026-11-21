@@ -1,14 +1,24 @@
 # RetailMind AI · Demand Forecasting & Inventory Decisions
 
-**From historical sales to forecasts, uncertainty and actionable inventory proposals.**
+**A practical way to turn retail sales history into demand forecasts and inventory decisions.**
 
-RetailMind brings together retail data analysis, a comparison of 15 forecasting candidates, probabilistic forecasts and a containerized API for inventory decision support.
+Retailers need to decide what to replenish before the next delivery arrives. Ordering too little can leave shelves empty; ordering too much can tie up cash and warehouse space. RetailMind is a forecasting and decision-support prototype that helps a planner examine those trade-offs for each product.
 
-![RetailMind illustrated production flow](docs/images/production-flow.gif)
+The service takes **consecutive daily sales quantities for a product** and predicts the quantity expected to be sold on each of the next **1–28 days**. It returns a central forecast and a range of plausible outcomes. A planner can combine those forecasts with stock on hand, incoming stock, supplier lead time and review period to calculate a suggested replenishment quantity, then explore what could happen if demand rises or a delivery is late. The suggestion supports a human decision; it does not place an order.
+
+![RetailMind animated production journey](docs/images/production-flow.gif)
 
 [Download the shareable MP4](docs/images/retailmind-production.mp4) · [Download the GIF](docs/images/production-flow.gif)
 
-A caller sends daily sales history → Timestral forecasts quantities → calibrated daily intervals show uncertainty → inventory rules combine forecasts with stock and lead time → the API returns an order proposal and scenario results. Proposals are advisory; the service does not place orders.
+### How the solution works
+
+1. **Prepare the history.** Clean retail transactions and aggregate recorded sales into daily product series. The API accepts a caller's daily quantities; it does not require the original dataset at inference time.
+2. **Forecast quantities.** A fine-tuned Timestral 209M model estimates future daily sales for the requested horizon.
+3. **Express uncertainty.** P10, P50 and P90 forecasts and historically calibrated daily bounds show a range around the central estimate.
+4. **Plan replenishment.** Inventory rules combine the forecast with on-hand and incoming stock, lead time, review period and a safety buffer to produce a proposed order.
+5. **Explore scenarios.** Simulate demand changes and delivery delays to inspect projected fulfillment and unmet units before acting.
+
+For technical readers, the project compares **15 model variants on 4,366 products**, exposes the selected model through FastAPI, packages it in Docker with a 2 GiB GPU allocator cap, and runs real inference and decision checks in GitHub Actions. The historical data measures **recorded sales**, not demand lost during stockouts; results and inventory simulations should be validated with current operational data before business use.
 
 ## Data & exploration
 
@@ -61,9 +71,11 @@ FastAPI provides single and batch forecasts, P10/P50/P90 and calibrated bounds, 
 
 ## Docker & deployment
 
-The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting) (the initial image upload is in progress). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
+The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
 
 ```bash
+# Pull the tested image, or build it from source.
+docker pull bmaged23/retailmind-ai-forecasting:latest
 docker build -t retailmind-ai-forecasting:local .
 docker run --rm -p 8000:8000 retailmind-ai-forecasting:local
 # API docs: http://localhost:8000/docs

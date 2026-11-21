@@ -22,7 +22,7 @@ Review models/timestral209m_lora/LICENSE before distributing the model or image.
 
 ## Docker Hub
 
-[RetailMind AI Forecasting on Docker Hub](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). The initial upload is in progress; once it completes, pull it with:
+[RetailMind AI Forecasting on Docker Hub](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). The verified image is publicly available. Pull it with:
 
 ```sh
 docker pull bmaged23/retailmind-ai-forecasting:latest
