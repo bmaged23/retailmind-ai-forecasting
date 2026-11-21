@@ -37,7 +37,11 @@ for days without recorded sales; missing dates are rejected.
     "history": [
       {"date": "2025-01-01", "quantity": 4},
       {"date": "2025-01-02", "quantity": 0},
-      {"date": "2025-01-03", "quantity": 7}
+      {"date": "2025-01-03", "quantity": 7},
+      {"date": "2025-01-04", "quantity": 2},
+      {"date": "2025-01-05", "quantity": 3},
+      {"date": "2025-01-06", "quantity": 5},
+      {"date": "2025-01-07", "quantity": 1}
     ]
   },
   "horizon_days": 28
@@ -68,3 +72,7 @@ Forecasts estimate recorded sales; stockouts can censor observed demand. The
 adapter and Mistral base weights use the included Modified MIT license, which
 has a monthly revenue condition. Review `models/timestral209m_lora/LICENSE`
 before publishing or distributing the Docker image.
+
+## Visual guide
+
+Open the [API HTML guide](../reports/api.html) in a browser, and see the [report index](../reports/README.md) for evaluation, uncertainty, inventory and deployment dashboards.

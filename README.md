@@ -20,9 +20,23 @@ The service takes **consecutive daily sales quantities for a product** and predi
 
 For technical readers, the project compares **15 model variants on 4,366 products**, exposes the selected model through FastAPI, packages it in Docker with a 2 GiB GPU allocator cap, and runs real inference and decision checks in GitHub Actions. The historical data measures **recorded sales**, not demand lost during stockouts; results and inventory simulations should be validated with current operational data before business use.
 
+## What a business can do with the forecast
+
+**Plan purchasing.** A planner can see expected product sales during the supplier lead time and review period, compare them with available and incoming stock, and review a proposed order quantity. This gives the team a consistent starting point for replenishment conversations.
+
+**See uncertainty.** A single forecast can hide how much outcomes vary. Daily P10, P50 and P90 predictions show lower, central and upper estimates. The saved historical calibration supplies additional daily bounds; they should be monitored and recalibrated against recent data before operational use.
+
+**Ask “what if?”** The scenario endpoint lets the planner change a demand multiplier and inbound delivery timing, then inspect projected fulfilled and unmet units. This helps explore a supplier delay or demand spike before making a decision.
+
+**Keep people in control.** The API returns an explanation and a proposed quantity. It cannot submit purchase orders or change inventory. Forecasts are estimates of recorded sales; the research dataset has no actual stock levels, supplier lead times or lost-sales records.
+
+![Example of forecast, safety buffer and stock position producing a proposed order](docs/images/replenishment-example.svg)
+
+*Illustration only:* if seven days of forecast demand total 35 units, a 10% safety fraction adds 3.5 units and stock on hand plus in transit totals 25 units, the API proposes **14 units** after rounding up. No interval buffer is included in this example. The protection period must fit within the supplied forecast horizon. See the [inventory API reference](docs/forecast-api.md#other-operations).
+
 ## Data & exploration
 
-The research uses historical transaction data ending in **2011**. Transactions were cleaned and aggregated into daily product sales; cancellations, non-product codes, missing dates and price features were investigated. A frozen cohort of **4,366 products** was used for the common model comparison. A zero in the series represents zero *recorded sales*, which can include stockouts or unavailable products.
+The research uses the **UCI Online Retail II** UK retailer dataset: **1,067,371 transaction lines** across two workbook sheets from 2009–2011. The cleaning audit records **1,037,019 included lines** after the configured exclusions; these are transaction rows, not products. Transactions were cleaned and aggregated into daily product sales; cancellations, non-product codes, missing dates and price features were investigated. A frozen cohort of **4,366 products** was used for the common model comparison. A zero in the series represents zero *recorded sales*, which can include stockouts or unavailable products. The dataset does not reveal product quality, production country or unsatisfied demand.
 
 Explore the interactive [data dashboard](reports/data-exploration.html), [feature analysis](reports/feature-eda.html), and [product-code audit](reports/code-family-audit.html). See [data setup](data/README.md) and [feature inventory](docs/feature-inventory.md) for the inputs and transformations. Download the repository and open HTML files in a browser; GitHub displays HTML as source.
 
@@ -61,6 +75,13 @@ The common model-selection window is **1–28 July 2011**. Forecasts were frozen
 | LightGBM | 5.110 | 19.707 | 200.9% | 2.08 |
 
 
+### Interpreting the results
+
+- **Why Timestral?** It had the lowest pooled MAE on the common July selection window: **2.331 units per product per day**, versus **3.435** for seasonal naive. Chronos-2 LoRA was close at **2.346**, so this was a competitive selection rather than a runaway win.
+- **What does WAPE mean?** The selected model’s pooled WAPE was **91.6%** on this sparse historical dataset. It is the absolute error summed across all predictions divided by total recorded sales, and it shows that the task remained difficult even for the leading candidate.
+- **How wide are the intervals?** In a separate November–December historical evaluation, the daily P10–P90 interval covered **91.53%** of observations, with mean width **10.159 units**. That is above the nominal 80% interval; coverage is not guaranteed for each product or for future business data. [Uncertainty report](reports/milestone2-uncertainty.html) · [Method and limitations](docs/milestone2-uncertainty.md).
+- **What about inventory savings?** The inventory study used synthetic stock and supplier assumptions, because those fields were absent from the dataset. Its outcomes are simulations, not measured business savings. [Inventory report](reports/milestone3-inventory.html) · [Scenario report](reports/milestone4-scenarios.html).
+
 *Latency is the recorded batch-run time divided by products, not a controlled single-request comparison. Models used different batch sizes and execution paths.*
 
 **Evaluation limits:** July selected the model; it is not an untouched final test. The October window was reused. The packaged LoRA adapter comes from the earlier validation run; the exact October checkpoint was not retained, so October scores cannot be attributed to the deployed checkpoint. See the [interactive comparison](reports/comparison/validation-comparison.html), [evaluation guide](reports/evaluation.html), [methodology](docs/validation-comparison.md), [scorecard](reports/comparison/scorecard.json), and [evaluation scripts](scripts/foundation_models/).
@@ -69,15 +90,23 @@ The common model-selection window is **1–28 July 2011**. Forecasts were frozen
 
 FastAPI provides single and batch forecasts, P10/P50/P90 and calibrated bounds, chronological holdout evaluation, reorder proposals and supply scenarios. OpenAPI documentation is served at `/docs`. [API visual guide](reports/api.html) · [API reference](docs/forecast-api.md)
 
+| What you send | What you get | Why it helps |
+|---|---|---|
+| Consecutive daily sales and a 1–28 day horizon | Daily P10/P50/P90 forecasts and interval bounds | Inspect expected demand and uncertainty by day |
+| A forecast, stock on hand, incoming stock and lead time | A proposed order quantity and its components | Review replenishment needs and safety assumptions |
+| Forecast demand, stock and a delivery scenario | Daily simulated fulfillment and unmet units | Explore a delay or demand change |
+| Historical observations and a holdout length | MAE, RMSE, WAPE and MASE when defined | Check a forecast on a chronological holdout |
+
+The deployed model uses the supplied **quantity history**. Product descriptions, country and price were explored during research; they are not required or consumed by this deployment’s forecast request.
+
 ## Docker & deployment
 
 The image packages the pinned Timestral base weights, fine-tuned adapter and API. [Docker Hub repository](https://hub.docker.com/r/bmaged23/retailmind-ai-forecasting). A local container passed real inference, interval, evaluation and inventory smoke checks. GPU inference is configured with a 2 GiB PyTorch allocator cap. [Docker guide](reports/docker.html) · [Deployment details](docs/docker/README.md)
 
 ```bash
-# Pull the tested image, or build it from source.
+# Pull and run the tested image.
 docker pull bmaged23/retailmind-ai-forecasting:latest
-docker build -t retailmind-ai-forecasting:local .
-docker run --rm -p 8000:8000 retailmind-ai-forecasting:local
+docker run --rm -p 8000:8000 bmaged23/retailmind-ai-forecasting:latest
 # API docs: http://localhost:8000/docs
 ```
 
@@ -86,6 +115,10 @@ Add `--gpus all` when the NVIDIA container runtime is available. Review the [mod
 ## CI/CD
 
 GitHub Actions builds the image, starts the service and runs a real-model API smoke test. A successful run on `main` publishes the tested image when the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` repository secrets are configured; otherwise publication is skipped with a warning. [CI/CD guide](reports/cicd.html) · [Workflow](.github/workflows/docker-image-ci.yml)
+
+## Reports and reproducibility
+
+The [report index](reports/README.md) links each HTML dashboard to its supporting README, source and limitations. Forecast CSVs, raw data and other generated artifacts are excluded from Git; the checked-in [selection scorecard](reports/comparison/scorecard.json) and evaluation scripts document the reported comparison.
 
 ## More analysis
 

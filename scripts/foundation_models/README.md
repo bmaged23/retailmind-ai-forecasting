@@ -76,3 +76,7 @@ check the license terms before any commercial use or redistribution.
 Do not label a different version (TimesFM 2.5 or Toto 1.0) as a fine-tuned
 version of TimesFM 3.0 or Toto 2.0. Fine-tuning results are measured; improvement
 is not assumed.
+
+## Published evaluation reports
+
+The tracked [common-cohort comparison HTML](../../reports/comparison/validation-comparison.html) and [scorecard](../../reports/comparison/scorecard.json) summarize the July selection window. See the [evaluation README](../../docs/evaluation/README.md), [uncertainty dashboard](../../reports/milestone2-uncertainty.html), [inventory simulation](../../reports/milestone3-inventory.html), and [scenario analysis](../../reports/milestone4-scenarios.html). Open the HTML files in a browser after downloading the repository. The October evaluation described above reused a test period and is not an untouched benchmark.

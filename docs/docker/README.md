@@ -4,7 +4,10 @@ A self-contained image packages the API, pinned Timestral base weights, LoRA ada
 
 ## Build and run
 
-docker build -t retailmind-ai-forecasting:local .   |   docker run --rm -p 8000:8000 retailmind-ai-forecasting:local
+```sh
+docker build -t retailmind-ai-forecasting:local .
+docker run --rm -p 8000:8000 retailmind-ai-forecasting:local
+```
 
 ## GPU and memory
 
@@ -27,3 +30,7 @@ Review models/timestral209m_lora/LICENSE before distributing the model or image.
 ```sh
 docker pull bmaged23/retailmind-ai-forecasting:latest
 ```
+
+## Visual guides
+
+[Docker HTML guide](../../reports/docker.html) · [API HTML guide](../../reports/api.html) · [CI/CD HTML guide](../../reports/cicd.html) · [Report index](../../reports/README.md). Open the HTML files in a browser after downloading the repository.
